@@ -44,11 +44,13 @@ public class TodoController {
 	@RequestMapping(value = "log", method = RequestMethod.POST)
 	public String gotoWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
 		if (authenticationService.auth(name, password)) {
-			model.put("name", name);
+			 model.addAttribute("name",name);
 			return "welcome";
+		}else
+		{
+		model.addAttribute("errorMessage", "Invalid Credentials!, Please try again!");  
 		}
-		model.put("errorMessage", "Invalid Credentials!, Please try again!");
-		return "welcome";
+		return "login";
 	}
 
 	@RequestMapping(value = "/welcomeTodo", method = RequestMethod.GET)

@@ -4,10 +4,12 @@ import org.springframework.stereotype.Service;
 
 @Service 
 public class AuthenticationService {
-	public boolean auth(String username, String password) {
-		boolean isValidUname = username.equalsIgnoreCase("surendra");
-		boolean isValidPassword = password.equalsIgnoreCase("surendra123");
-		return isValidUname&&isValidPassword;
+	 private static final String STATIC_USERNAME = "admin";
+	    private static final String STATIC_PASSWORD = "password";
+	    
+	public boolean auth(String name, String password) {
+		 
+		return  STATIC_USERNAME.equals(name) && STATIC_PASSWORD.equals(password);
 		
 	}
 

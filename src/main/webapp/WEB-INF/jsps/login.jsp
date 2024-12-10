@@ -59,15 +59,20 @@
       background-color: #0056b3;
     }
   </style>
+ 
 </head>
 <body>
+  
   <div class="login-container">
     <h1>Welcome to the Login Page</h1>
-    <form action="log" method="post">
+    
+       <form action="log" method="post">
       <input type="text" name="name" placeholder="Name">
       <input type="password" name="password" placeholder="Password">
+      <div><h3 style="color: red;"> ${errorMessage}</h3></div>
       <input type="submit" value="Login">
     </form>
   </div>
+   
 </body>
 </html>
