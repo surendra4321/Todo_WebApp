@@ -38,15 +38,15 @@ body {
 <body>
 	<div class="container">
 		<h1>Enter Todo Details</h1>
+		<ul>
 		<form:form action="add-todos" method="post" modelAttribute="todo">
 				Description: <form:input type="text" path="discription"
 				required="required" />
-			<form:input type="hidden" path="id" />
-			<form:input type="hidden" path="done" />
+			<form:input type="hidden" path="id"/>
+			<form:input type="hidden" path="done"/>
             <input type="submit" value="Add" />
 		</form:form>
-
 		</ul>
 	</div>
-</body>
+ </body>
 </html>

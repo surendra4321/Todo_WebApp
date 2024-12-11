@@ -12,6 +12,13 @@ public class Todo {
 	private String discription;
 	private LocalDate targetDate;
 	private boolean done;
+	
+	
+
+	public Todo() {
+		super();
+	 
+	}
 
 	public Todo(int id, String username, String discription, LocalDate targetDate, boolean done) {
 		super();

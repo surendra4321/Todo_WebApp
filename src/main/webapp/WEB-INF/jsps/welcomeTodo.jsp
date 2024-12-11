@@ -75,6 +75,7 @@ h1 {
 <body>
 	<div>
 		<h1>Your Todos</h1>
+		<h3>${msg}</h3>
 		<table class="table">
 			<thead>
 				<tr>
@@ -82,6 +83,8 @@ h1 {
 					<th>Discription</th>
 					<th>Target Date</th>
 					<th>Is Done?</th>
+					<th>Delete Todo</th>
+					<th>Update Todo</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -91,6 +94,8 @@ h1 {
 						<td>${todo.discription}</td>
 						<td>${todo.targetDate}</td>
 						<td>${todo.done}</td>
+						<td> <a href="delete-todo?id=${todo.id}" class="btn btn-warning">Delete</a>   </td>
+                        <td> <a href="update-todo?id=${todo.id}" class="btn btn-success">Update</a>   </td>
 					</tr>
 				</c:forEach>
 			</tbody>

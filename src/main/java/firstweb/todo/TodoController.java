@@ -31,17 +31,13 @@ public class TodoController {
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	public TodoController(TodoService todoService, AuthenticationService authenticationService) {
-		this.todoService = todoService;
-		this.authenticationService = authenticationService;
-	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	 
+	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public String gotoLoginPage() {
 		return "login";
 	}
 
-	@RequestMapping(value = "log", method = RequestMethod.POST)
+	@RequestMapping(value="log", method = RequestMethod.POST)
 	public String gotoWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
 		if (authenticationService.auth(name, password)) {
 			 model.addAttribute("name",name);
@@ -49,19 +45,20 @@ public class TodoController {
 		}else
 		{
 		model.addAttribute("errorMessage", "Invalid Credentials!, Please try again!");  
-		}
+		
 		return "login";
+		}
 	}
 
-	@RequestMapping(value = "/welcomeTodo", method = RequestMethod.GET)
-	public String listAllTodos(ModelMap model) {
+	 @RequestMapping(value="/welcomeTodo", method = RequestMethod.GET)
+	 public String listAllTodos(ModelMap model) {
 		List<Todo> todos = todoService.findByUsername("surendra");
 		model.addAttribute("todos", todos);
 
 		return "welcomeTodo";
 	}
 
-	@RequestMapping(value = "add-todo", method = RequestMethod.GET)
+	@RequestMapping(value="add-todo", method = RequestMethod.GET)
 	public String showNewTodoPage(ModelMap model) {
 		String username = (String) model.get("name");
 		Todo todo = new Todo(0, username, "", LocalDate.now().plusYears(1), false);
@@ -69,14 +66,21 @@ public class TodoController {
 		return "todo";
 	}
 
-	@RequestMapping(value = "add-todos", method = RequestMethod.POST)
-	public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+	@RequestMapping(value="add-todos", method = RequestMethod.POST)
+	 public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 		if (result.hasErrors()) {
 			return "todo";
 		}
 		String username = (String) model.get("name");
 		todoService.addTodo(username, todo.getDiscription(), LocalDate.now().plusYears(1), false);
 		return "redirect:/welcomeTodo";
+	}
+	
+	@RequestMapping("delete-todo")
+	public String deleteTodo(@RequestParam int id, ModelMap model) {
+		 boolean isDeleted = todoService.deleteById(id);
+		 model.addAttribute("msg", "Todo Deleted Succesfully!");
+		return isDeleted ? "redirect:/welcomeTodo":"Todo deleted Successfully";
 	}
 
 }

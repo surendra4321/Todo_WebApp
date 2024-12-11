@@ -3,6 +3,7 @@ package firstweb.todoService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,16 @@ public class TodoService {
 
 		todos.add(new Todo(++todoCount, username, discription, plusYears, b));
 
+	}
+
+	public boolean deleteById(int id) {
+//		Todo todo = new Todo();
+//		     Predicate<? super Todo> predicate= t -> todo.getId()==id;
+//		     todos.removeIf(predicate);
+		
+		return todos.removeIf(todo ->todo.getId()==id);
+		
+		
 	}
 
 }
