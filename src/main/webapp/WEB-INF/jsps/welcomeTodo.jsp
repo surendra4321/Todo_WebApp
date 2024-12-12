@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,6 +106,6 @@ h1 {
 		</table>
 		<a href="add-todo" class="btn btn-success">Add Todo</a>
 	</div>
-
 </body>
 </html>
+

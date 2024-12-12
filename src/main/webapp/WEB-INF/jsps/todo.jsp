@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -48,5 +48,35 @@ body {
 		</form:form>
 		</ul>
 	</div>
+	  <h2>Current Todos</h2>
+     <div class="container">
+	
+	<h1>Enter Todo Details</h1>
+	
+	<form:form action="update"  method="post" modelAttribute="todo">
+		<fieldset class="mb-3">				
+			<form:label path="discription">Description</form:label>
+			<form:input type="text" path="discription" required="required"/>
+			<form:errors path="discription" cssClass="text-warning"/>
+		</fieldset>
+		<fieldset class="mb-3">				
+			<form:label path="targetDate">Target Date</form:label>
+			<form:input type="text" path="targetDate" required="required"/>
+			<form:errors path="targetDate" cssClass="text-warning"/>
+		</fieldset>
+		<form:input type="hidden" path="id"/>
+		<form:input type="hidden" path="done"/>
+		<input type="hidden" name="_method" value="PUT" />
+		<input type="submit" class="btn btn-success"/>
+	
+	</form:form>
+	
+</div>
+ <script type="text/javascript">
+	$('#targetDate').datepicker({
+	    format: 'yyyy-mm-dd'
+	});
+</script>
  </body>
 </html>
+ 

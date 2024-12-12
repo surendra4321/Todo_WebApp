@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import firstweb.dto.Todo;
+import jakarta.validation.Valid;
 
 @Service
 public class TodoService {
@@ -42,5 +46,26 @@ public class TodoService {
 		
 		
 	}
+
+	public Todo findById(int id) {
+		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
+		Todo todo = todos.stream().filter(predicate).findFirst().get();
+		return todo;
+	}
+
+	public void updateTodo(@Valid Todo todo) {
+		for(int i=0; i<todos.size(); i++) {
+			if(todos.get(i).getId()== todo.getId()) {
+				todos.set(i, todo);
+				return;
+			}
+			
+		}
+		todos.add(todo);
+		 
+		
+	}
+
+	 
 
 }
