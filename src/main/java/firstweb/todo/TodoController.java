@@ -3,7 +3,9 @@ package firstweb.todo;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import firstweb.dto.Todo;
-import firstweb.service.AuthenticationService;
+
 import firstweb.todoService.TodoService;
 import jakarta.validation.Valid;
 
@@ -28,25 +30,17 @@ public class TodoController {
 
 	@Autowired
 	private TodoService todoService;
-	@Autowired
-	private AuthenticationService authenticationService;
 
-	@RequestMapping(value ="/", method = RequestMethod.GET)
-	public String gotoLoginPage() {
-		return "login";
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String gotoLoginPage(ModelMap model) {
+		model.put("name", "surendra");
+		return "welcome";
 	}
 
-	@RequestMapping(value ="log", method = RequestMethod.POST)
-	public String gotoWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
-		if (authenticationService.auth(name, password)) {
-			model.addAttribute("name", name);
-			return "welcome";
-		} else {
-			model.addAttribute("errorMessage", "Invalid Credentials!, Please try again!");
-
-			return "login";
-		}
-	}
+//	private String getLoggedinUsername() {
+//		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//	return authentication.getName();
+//	}
 
 	@RequestMapping(value = "/welcomeTodo", method = RequestMethod.GET)
 	public String listAllTodos(ModelMap model) {
@@ -92,8 +86,8 @@ public class TodoController {
 		return "todo";
 	}
 
-	 @RequestMapping(value = "update", method = RequestMethod.POST)
-	 public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "todo";
