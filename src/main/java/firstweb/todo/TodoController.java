@@ -31,12 +31,12 @@ public class TodoController {
 	@Autowired
 	private AuthenticationService authenticationService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public String gotoLoginPage() {
 		return "login";
 	}
 
-	@RequestMapping(value = "log", method = RequestMethod.POST)
+	@RequestMapping(value ="log", method = RequestMethod.POST)
 	public String gotoWelcomePage(@RequestParam String name, @RequestParam String password, ModelMap model) {
 		if (authenticationService.auth(name, password)) {
 			model.addAttribute("name", name);
@@ -92,8 +92,8 @@ public class TodoController {
 		return "todo";
 	}
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+	 @RequestMapping(value = "update", method = RequestMethod.POST)
+	 public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "todo";

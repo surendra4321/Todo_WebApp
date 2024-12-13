@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
@@ -15,20 +14,41 @@ body {
 	font-family: 'Arial', sans-serif;
 	background: linear-gradient(120deg, #fdfbfb, #ebedee);
 	color: #333;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	min-height: 100vh;
 }
 
+/* Header styling */
+header {
+	background: #4CAF50;
+	color: white;
+	padding: 15px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .nav-links a {
+	color: white;
+	text-decoration: none;
+	margin: 0 10px;
+	font-size: 1rem;
+	transition: color 0.3s ease;
+}
+
+header .nav-links a:hover {
+	color: #ffeb3b;
+}
+
 /* Container styling */
-div {
+.container {
 	width: 90%;
 	max-width: 1200px;
 	background: #fff;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	border-radius: 10px;
+	margin: 30px auto;
 }
 
 /* Header styling */
@@ -71,41 +91,77 @@ h1 {
 .table tbody td {
 	color: #555;
 }
+
+/* Button styling */
+.btn {
+	text-decoration: none;
+	padding: 8px 12px;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 0.9rem;
+	transition: background 0.3s ease;
+}
+
+.btn-warning {
+	background-color: #ff9800;
+}
+
+.btn-warning:hover {
+	background-color: #e68a00;
+}
+
+.btn-success {
+	background-color: #4CAF50;
+}
+
+.btn-success:hover {
+	background-color: #45a049;
+}
 </style>
 </head>
 <body>
 
-	<div>
-		<h1>Your Todos</h1>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Discription</th>
-					<th>Target Date</th>
-					<th>Is Done?</th>
-					<th>Delete Todo</th>
-					<th>Update Todo</th>
-				</tr>
-			</thead>
-			<tbody>
-				<h3 style="color: red;">${msg}</h3>
-				<c:forEach items="${todos}" var="todo">
-					<tr>
-						<td>${todo.id}</td>
-						<td>${todo.discription}</td>
-						<td>${todo.targetDate}</td>
-						<td>${todo.done}</td>
-						<td><a href="delete-todo?id=${todo.id}"
-							class="btn btn-warning">Delete</a></td>
-						<td><a href="update-todo?id=${todo.id}"
-							class="btn btn-success">Update</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<a href="add-todo" class="btn btn-success">Add Todo</a>
+<header>
+	<div>Todo Application</div>
+	<div class="nav-links">
+		<a href="add-todo">Home</a>
+		<a href="/">Logout</a>
 	</div>
+</header>
+
+<div class="container">
+	<h1>Your Todos</h1>
+	<h3 style="color: red;">${msg}</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Description</th>
+				<th>Target Date</th>
+				<th>Is Done?</th>
+				<th>Delete Todo</th>
+				<th>Update Todo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${todos}" var="todo">
+				<tr>
+					<td>${todo.id}</td>
+					<td>${todo.discription}</td>
+					<td>${todo.targetDate}</td>
+					<td>${todo.done}</td>
+					<td>
+						<a href="delete-todo?id=${todo.id}" class="btn btn-warning">Delete</a>
+					</td>
+					<td>
+						<a href="update-todo?id=${todo.id}" class="btn btn-success">Update</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<a href="add-todo" class="btn btn-success">Add Todo</a>
+</div>
+
 </body>
 </html>
-

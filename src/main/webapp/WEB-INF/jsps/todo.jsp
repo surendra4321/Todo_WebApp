@@ -18,6 +18,27 @@ body {
 	background: linear-gradient(120deg, #84fab0, #8fd3f4);
 	color: #fff;
 }
+header {
+	background: #4CAF50;
+	color: white;
+	padding: 15px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header .nav-links a {
+	color: white;
+	text-decoration: none;
+	margin: 0 10px;
+	font-size: 1rem;
+	transition: color 0.3s ease;
+}
+
+header .nav-links a:hover {
+	color: #ffeb3b;
+}
 
 .container {
 	text-align: center;
