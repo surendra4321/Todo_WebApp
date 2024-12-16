@@ -33,20 +33,19 @@ public class TodoController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String gotoLoginPage(ModelMap model) {
-		model.put("name", "surendra");
+		model.put("name",getLoggedinUsername());
 		return "welcome";
 	}
-
-//	private String getLoggedinUsername() {
-//		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//	return authentication.getName();
-//	}
+	private String getLoggedinUsername() {		 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	
+		return authentication.getName();
+	}
+	
 
 	@RequestMapping(value = "/welcomeTodo", method = RequestMethod.GET)
 	public String listAllTodos(ModelMap model) {
 		List<Todo> todos = todoService.findByUsername("surendra");
 		model.addAttribute("todos", todos);
-
 		return "welcomeTodo";
 	}
 
@@ -88,11 +87,9 @@ public class TodoController {
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
-
 		if (result.hasErrors()) {
 			return "todo";
 		}
-
 		String username = (String) model.get("name");
 		todo.setUsername(username);
 		todoService.updateTodo(todo);
