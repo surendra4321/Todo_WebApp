@@ -172,6 +172,8 @@ footer {
 			<form:form action="add-todos" method="post" modelAttribute="todo">
 				Description: <form:input type="text" path="discription"
 					required="required" />
+					Target Date: <form:input type="text" path="targetDate"
+					required="required" />
 				<form:input type="hidden" path="id" />
 				<form:input type="hidden" path="done" />
 				<input type="submit" value="Add" />
