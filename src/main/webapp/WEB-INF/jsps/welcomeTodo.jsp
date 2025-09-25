@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <!DOCTYPE html>
@@ -50,15 +51,69 @@ header .nav-links a:hover {
 	border-radius: 10px;
 	margin: 30px auto;
 }
-
-/* Header styling */
-h1 {
-	text-align: center;
-	color: #4CAF50;
-	font-size: 2rem;
-	margin-bottom: 20px;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
 }
+
+/* Branding text styling */
+header div {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Navigation container */
+header .navbar-collapse {
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation list styling */
+header .navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+/* Navigation links styling */
+header .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+header .nav-link:hover {
+    color: #ffeb3b;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header .navbar-collapse {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 
 /* Table styling */
 .table {
@@ -120,48 +175,52 @@ h1 {
 </style>
 </head>
 <body>
-
-<header>
-	<div>Todo Application</div>
-	<div class="nav-links">
-		<a href="add-todo">Home</a>
-		<a href="/">Logout</a>
+	<header>
+		<div>Todo Application</div>
+		 
+	<div class="collapse navbar-collapse">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/welcomeTodo">Todos</a></li>
+		</ul>
 	</div>
-</header>
+	<ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	</ul>	
+</nav>
+	</header>
 
-<div class="container">
-	<h1>Your Todos</h1>
-	<h3 style="color: red;">${msg}</h3>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Description</th>
-				<th>Target Date</th>
-				<th>Is Done?</th>
-				<th>Delete Todo</th>
-				<th>Update Todo</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${todos}" var="todo">
+	<div class="container">
+		<h1>Your Todos</h1>
+		<h3 style="color: red;">${msg}</h3>
+		<table class="table">
+			<thead>
 				<tr>
-					<td>${todo.id}</td>
-					<td>${todo.discription}</td>
-					<td>${todo.targetDate}</td>
-					<td>${todo.done}</td>
-					<td>
-						<a href="delete-todo?id=${todo.id}" class="btn btn-warning">Delete</a>
-					</td>
-					<td>
-						<a href="update-todo?id=${todo.id}" class="btn btn-success">Update</a>
-					</td>
+					<th>Id</th>
+					<th>Description</th>
+					<th>Target Date</th>
+					<th>Is Done?</th>
+					<th>Delete Todo</th>
+					<th>Update Todo</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<a href="add-todo" class="btn btn-success">Add Todo</a>
-</div>
+			</thead>
+			<tbody>
+				<c:forEach items="${todos}" var="todo">
+					<tr>
+						<td>${todo.id}</td>
+						<td>${todo.discription}</td>
+						<td>${todo.targetDate}</td>
+						<td>${todo.done}</td>
+						<td><a href="delete-todo?id=${todo.id}"
+							class="btn btn-warning">Delete</a></td>
+						<td><a href="update-todo?id=${todo.id}"
+							class="btn btn-success">Update</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<a href="add-todo" class="btn btn-success">Add Todo</a>
+	</div>
 
 </body>
 </html>

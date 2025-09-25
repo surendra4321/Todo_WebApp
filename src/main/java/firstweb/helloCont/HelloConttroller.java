@@ -2,6 +2,7 @@ package firstweb.helloCont;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloConttroller {
@@ -10,7 +11,7 @@ public class HelloConttroller {
 	// @ResponseBody //It will return as it is the method is returning on web page()
 	// Response Body we can use only when we wnat the return a string on the web
 	// page
-
+	@ResponseBody
 	public String Hello() {
 		return "This is My first web application";
 	}
