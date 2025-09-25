@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("name")
-public class TodoControllerJpa{
+public class TodoControllerJpa {
 
 	public TodoControllerJpa() {
 
@@ -35,17 +35,18 @@ public class TodoControllerJpa{
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String gotoLoginPage(ModelMap model) {
-		model.put("name",getLoggedinUsername());
+		model.put("name", getLoggedinUsername());
 		return "welcome";
 	}
-	private String getLoggedinUsername() {		 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	
+
+	private String getLoggedinUsername() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication.getName();
 	}
-	
+
 	@RequestMapping(value = "/welcomeTodo", method = RequestMethod.GET)
 	public String listAllTodos(ModelMap model) {
-	 	 String username= (String)model.get("name");
+		String username = (String) model.get("name");
 		List<Todo> todos = todoRepository.findByUsername(username);
 		model.addAttribute("todos", todos);
 		return "welcomeTodo";
@@ -66,7 +67,7 @@ public class TodoControllerJpa{
 		}
 		String username = (String) model.get("name");
 		todo.setUsername(username);
-		todoRepository.save(todo); 
+		todoRepository.save(todo);
 		return "redirect:/welcomeTodo";
 	}
 

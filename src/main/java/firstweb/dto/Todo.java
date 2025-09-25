@@ -10,20 +10,18 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String username;
-	@Size(min=10, message="Enter atleast 10 characters")
+	@Size(min = 10, message = "Enter atleast 10 characters")
 	private String discription;
 	private LocalDate targetDate;
 	private boolean done;
-	
-	
 
 	public Todo() {
 		super();
-	 
+
 	}
 
 	public Todo(int id, String username, String discription, LocalDate targetDate, boolean done) {

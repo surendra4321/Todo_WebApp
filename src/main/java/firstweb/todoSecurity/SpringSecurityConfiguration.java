@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
- 
 
 @Configuration
 public class SpringSecurityConfiguration {
@@ -25,13 +24,8 @@ public class SpringSecurityConfiguration {
 
 	private UserDetails createNewUser(String username, String password) {
 		Function<String, String> passwordEncoder = input -> passwordEncoder().encode(input);
-		UserDetails userDetails = User
-				.builder()
-				.passwordEncoder(passwordEncoder)
-				.username(username)
-				.password(password)
-				.roles("USER", "ADMIN") 
-				.build();
+		UserDetails userDetails = User.builder().passwordEncoder(passwordEncoder).username(username).password(password)
+				.roles("USER", "ADMIN").build();
 		return userDetails;
 	}
 
@@ -50,7 +44,4 @@ public class SpringSecurityConfiguration {
 		return http.build();
 	}
 
-	 
-
-	 
 }
